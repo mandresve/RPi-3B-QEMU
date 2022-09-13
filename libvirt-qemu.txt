@@ -1,0 +1,29 @@
+<domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+  <name>QEMUGuest2</name>
+  <uuid>c7a5fdbd-edaf-9455-926a-d65c16db1809</uuid>
+  <qemu:commandline>
+	<qemu:arg value='-M'/>
+	<qemu:arg value='raspi3b'/>
+	<qemu:arg value='-dtb'/>
+	<qemu:arg value='./dtbs/bcm2710.dtb'/>
+	<qemu:arg value='-kernel'/>
+	<qemu:arg value='./quemukernel8'/>
+	<qemu:arg value='-sd'/>
+	<qemu:arg value='2022-09-06-raspios-bullseye-armhf.img'/>
+	<qemu:arg value='-append'/>
+	<qemu:arg value='rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1'/>
+	<qemu:arg value='-m 1G'/>
+	<qemu:arg value='-smp 4'/>
+	<qemu:arg value='-serial stdio'/>
+	<qemu:arg value='-usb'/>
+	<qemu:arg value='-device usb-mouse'/>
+	<qemu:arg value='-device usb-kbd'/>
+	<qemu:arg value=''/>
+  </qemu:commandline>
+</domain>
+
+
+#Option1 using microsd: qemu-system-aarch64 -M raspi3b -m 1G -sd 2022-09-06-raspios-bullseye-armhf.img -dtb ./bcm2710.dtb -kernel qemukernel8 -smp 4 -serial stdio -usb -device usb-mouse -device usb-kbd -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1"
+
+#Option2 using QCOW2: qemu-system-aarch64 -M raspi3b -m 1G -hda "./system.qcow2" -dtb ./bcm2710.dtb -kernel qemukernel8 -smp 4 -serial stdio -usb -device usb-mouse -device usb-kbd -append "rw earlyprintk loglevel=8 console=ttyAMA0,115200 dwc_otg.lpm_enable=0 root=/dev/mmcblk0p2 rootdelay=1"
+
